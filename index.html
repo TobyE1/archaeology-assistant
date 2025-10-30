@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Archaeology Assistant</title>
+    <script src="https://cdn.jsdelivr.net/npm/alt1/lib/alt1.js"></script>
+    <style>
+        body {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        #app-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 1em;
+            color: #ff981f;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-name">Archaeology Assistant</div>
+    <p>Basic application framework loaded successfully.</p>
+    <p>Features will be added here in future stories.</p>
+
+    <script>
+        // Check if we are running in Alt1
+        if (window.alt1) {
+            console.log("Alt1 environment detected.");
+            // Tell Alt1 the app is loaded
+            alt1.identifyApp("./appconfig.json");
+        } else {
+            console.log("Not running in Alt1. This app is designed for the Alt1 toolkit.");
+        }
+    </script>
+</body>
+</html>
