@@ -3,7 +3,7 @@
     "description": "A RuneScape 3 Alt1 app to assist players with Archaeology skill tracking and planning.",
     "appUrl": "./index.html",
     "configUrl": "./appconfig.json",
-    "iconUrl": "./icon.png",
+    "iconUrl": "./images/icon.png",
     "defaultWidth": 400,
     "defaultHeight": 300,
     "minWidth": 300,
