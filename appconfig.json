@@ -8,5 +8,5 @@
     "defaultHeight": 200,
     "requestHandlers": [],
     "activators": [],
-    "permissions": "overlay"
+    "permissions": "pixel,gamestate,overlay"
 }
