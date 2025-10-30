@@ -1,0 +1,12 @@
+{
+    "appName": "Archaeology Assistant",
+    "description": "A QoL overlay for the Archaeology skill.",
+    "appUrl": "./index.html",
+    "configUrl": "./appconfig.json",
+    "iconUrl": "./icon.png",
+    "defaultWidth": 300,
+    "defaultHeight": 200,
+    "requestHandlers": [],
+    "activators": [],
+    "permissions": "overlay"
+}
