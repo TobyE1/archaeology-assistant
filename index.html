@@ -1,178 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Archaeology Assistant</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="alt1lib.js"></script>
-    <script src="js/storageCapture.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archaeology Assistant</title>
+  <link rel="stylesheet" href="./styles.css" />
 </head>
+
 <body>
-    <div id="app">
-        <h1>Archaeology Assistant</h1>
+  <div class="app-container">
+    <h1>Archaeology Assistant</h1>
+    <p>Welcome to the RuneScape Archaeology Assistant.</p>
 
-        <div class="button-container">
-            <button id="startCaptureBtn" class="main-btn">Material Storage Capture</button>
-        </div>
+    <section id="material-capture-section" class="feature-section">
+      <h2>Material Storage Capture</h2>
+      <p>
+        Use this feature to capture your Archaeology Material Storage via the Journal.
+        Follow the prompts carefully to ensure all materials are recorded.
+      </p>
 
-        <div id="statusArea" class="status-area"></div>
+      <div class="capture-controls">
+        <button id="startCapture">Start Capture</button>
+        <button id="capture1" disabled>Capture Screen 1 (Pre-scroll)</button>
+        <button id="capture2" disabled>Capture Screen 2 (Post-scroll)</button>
+      </div>
 
-        <div id="exportContainer" class="hidden">
-            <button id="exportCsvBtn" class="secondary-btn">Export to CSV</button>
-            <button id="exportTableBtn" class="secondary-btn">View as Table</button>
-        </div>
+      <div id="statusArea" class="status-area">Ready.</div>
+    </section>
+  </div>
 
-        <div id="tableContainer" class="hidden"></div>
-    </div>
+  <!-- ✅ Load the Alt1 API from official source -->
+  <script src="https://runeapps.org/alt1lib.js"></script>
 
-    <script>
-        // === INITIAL SETUP ===
-        const statusArea = document.getElementById('statusArea');
-        const exportContainer = document.getElementById('exportContainer');
-        const tableContainer = document.getElementById('tableContainer');
-        const startCaptureBtn = document.getElementById('startCaptureBtn');
+  <!-- ✅ Your feature script -->
+  <script src="./features/material-capture/materialCapture.js"></script>
 
-        let materialData = [];
-
-        // === STATUS DISPLAY HELPERS ===
-        function setStatus(msg, type = 'info') {
-            statusArea.className = 'status-area ' + type;
-            statusArea.textContent = msg;
-        }
-
-        // === MAIN FLOW ===
-        startCaptureBtn.addEventListener('click', async () => {
-            setStatus('Checking for Material Storage interface...', 'info');
-
-            // 1. Check if Material Storage is open
-            const isStorageDetected = await detectMaterialStorage();
-
-            if (!isStorageDetected) {
-                setStatus('Please open Material Storage via the Journal...', 'warn');
-                await waitForStorageOpen();
-            }
-
-            // 2. Begin pre-scroll capture
-            setStatus('Capturing materials (pre-scroll)...', 'info');
-            const preScrollImage = await captureStorageImage();
-
-            if (!preScrollImage) {
-                setStatus('Failed to capture image. Please check Alt1 capture permissions.', 'error');
-                return;
-            }
-
-            // 3. Prompt user to scroll
-            setStatus('Please scroll to view remaining materials, then click "Confirm Capture".', 'info');
-            const confirmButton = createConfirmButton('Confirm Capture');
-            document.body.appendChild(confirmButton);
-
-            await new Promise(resolve => {
-                confirmButton.addEventListener('click', () => {
-                    confirmButton.remove();
-                    resolve();
-                });
-            });
-
-            // 4. Post-scroll capture
-            setStatus('Capturing materials (post-scroll)...', 'info');
-            const postScrollImage = await captureStorageImage();
-
-            // 5. Combine and parse data (placeholder)
-            setStatus('Processing captured data...', 'info');
-            materialData = processCapturedData(preScrollImage, postScrollImage);
-
-            if (materialData.length === 0) {
-                setStatus('App is failing to capture. Please ensure you opened Material Storage via the Journal.', 'error');
-                return;
-            }
-
-            // 6. Enable export options
-            exportContainer.classList.remove('hidden');
-            setStatus('Capture complete! You can now export your data.', 'success');
-        });
-
-        // === MOCK / HELPER FUNCTIONS ===
-        async function detectMaterialStorage() {
-            // Placeholder pixel detection logic
-            // In future: detect specific pixel patterns on screen
-            return Math.random() > 0.3; // Simulate 70% chance it’s detected
-        }
-
-        async function waitForStorageOpen(timeout = 6000) {
-            const start = Date.now();
-            return new Promise(resolve => {
-                const interval = setInterval(async () => {
-                    if (await detectMaterialStorage()) {
-                        clearInterval(interval);
-                        resolve(true);
-                    } else if (Date.now() - start > timeout) {
-                        clearInterval(interval);
-                        setStatus(
-                            'App cannot capture Material Storage. Please ensure it is opened via the Journal and check Alt1 capture settings.',
-                            'error'
-                        );
-                        resolve(false);
-                    }
-                }, 1000);
-            });
-        }
-
-        async function captureStorageImage() {
-            try {
-                if (window.alt1 && alt1.permissionPixel) {
-                    const img = a1lib.captureHoldFullRs();
-                    return img.toDataURL();
-                } else {
-                    console.warn("Alt1 not detected or pixel permission missing");
-                    return null;
-                }
-            } catch (err) {
-                console.error(err);
-                return null;
-            }
-        }
-
-        function processCapturedData(preScroll, postScroll) {
-            // Placeholder: would run OCR or pixel-matching to detect material quantities
-            // Returns mock data
-            return [
-                { material: "Third Age Iron", quantity: 610 },
-                { material: "Samite Silk", quantity: 52 },
-                { material: "White Oak", quantity: 192 }
-            ];
-        }
-
-        function createConfirmButton(label) {
-            const btn = document.createElement('button');
-            btn.textContent = label;
-            btn.className = 'main-btn';
-            return btn;
-        }
-
-        // === EXPORT HANDLERS ===
-        document.getElementById('exportCsvBtn').addEventListener('click', () => {
-            const csvContent = [
-                ['Material', 'Quantity'],
-                ...materialData.map(row => [row.material, row.quantity])
-            ].map(e => e.join(',')).join('\n');
-
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'archaeology_materials.csv';
-            link.click();
-        });
-
-        document.getElementById('exportTableBtn').addEventListener('click', () => {
-            const tableHtml = `
-                <table>
-                    <tr><th>Material</th><th>Quantity</th></tr>
-                    ${materialData.map(row => `<tr><td>${row.material}</td><td>${row.quantity}</td></tr>`).join('')}
-                </table>`;
-            tableContainer.innerHTML = tableHtml;
-            tableContainer.classList.remove('hidden');
-        });
-    </script>
+  <!-- ✅ Your main app logic (optional, if used for navigation or shared utilities) -->
+  <script src="./js/main.js"></script>
 </body>
 </html>
