@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Material Storage Capture — Archaeology Assistant</title>
+  <link rel="stylesheet" href="./materialCapture.css" />
+  <script src="https://runeapps.org/alt1lib.js"></script>
+  <script defer src="./materialCapture.js"></script>
+</head>
+<body>
+  <div class="msc-container">
+    <h2>Material Storage Capture</h2>
+    <p class="hint">This is a two-step capture. Capture Screen 1 (pre-scroll), then scroll in-game and Capture Screen 2 (post-scroll).</p>
+
+    <div class="controls">
+      <button id="btn-capture1">Capture Screen 1 (Pre-scroll)</button>
+      <button id="btn-capture2">Capture Screen 2 (Post-scroll)</button>
+      <button id="btn-merge" disabled>Merge & Prepare Export</button>
+    </div>
+
+    <div class="captures">
+      <div class="capture-block">
+        <h3>Screen 1</h3>
+        <div id="img1container" class="imgcontainer">No capture yet</div>
+      </div>
+      <div class="capture-block">
+        <h3>Screen 2</h3>
+        <div id="img2container" class="imgcontainer">No capture yet</div>
+      </div>
+    </div>
+
+    <div id="manualTableArea" class="manual-area" hidden>
+      <h3>Verify / Enter Quantities</h3>
+      <p>We’ve loaded the ordered material list. Please quickly enter the numeric amounts you see for each material. Use 0 if none.</p>
+      <div id="materialsForm" class="materials-form"></div>
+
+      <div class="export-controls">
+        <button id="btn-export-csv">Export CSV</button>
+        <button id="btn-copy-table">Copy Table</button>
+        <a id="download-link" style="display:none"></a>
+      </div>
+    </div>
+
+    <div id="message" class="message"></div>
+  </div>
+</body>
+</html>
