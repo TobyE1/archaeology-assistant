@@ -1,0 +1,57 @@
+{
+  "Agnostic Materials": [
+    "Agnostic Material",
+    "Third Age Iron",
+    "Samite Silk",
+    "White Oak",
+    "Gold Rune",
+    "Orthenglass",
+    "Vellum",
+    "Leather Scraps",
+    "Soapstone",
+    "Animal Furs",
+    "Fossilised bone"
+  ],
+  "Armadylean Materials": [
+    "Stormguard steel",
+    "Wings of war",
+    "Armadylean yellow",
+    "Aetherium alloy",
+    "Quintessence"
+  ],
+  "Bandosian Materials": [
+    "Malachite green",
+    "Mark of kyzaj",
+    "Vulcanised rubber",
+    "Warforged bronze",
+    "Yu’biusk clay"
+  ],
+  "Dragonkin Materials": [
+    "Dragon Metal",
+    "Orgone",
+    "Compass rose",
+    "Carbon black",
+    "Felt"
+  ],
+  "Saradominist Materials": [
+    "Keramos",
+    "White marble",
+    "Cobalt blue",
+    "Everlight silvthril",
+    "Star of Saradomin"
+  ],
+  "Zamorakian Materials": [
+    "Cadium red",
+    "Chaotic brimstone",
+    "Demonhide",
+    "Eye of Dragon",
+    "Hellfire metal"
+  ],
+  "Zarosian Materials": [
+    "Zarosian insignia",
+    "Imperial steel",
+    "Ancient vis",
+    "Tyrian purple",
+    "Blood of Orcus"
+  ]
+}
