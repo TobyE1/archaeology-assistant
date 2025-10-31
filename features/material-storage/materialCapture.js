@@ -1,5 +1,6 @@
 // features/material-capture/materialCapture.js
 // Defensive, verbose version for debugging + capture flow
+console.log("[MSC] script loaded");
 
 window.addEventListener("DOMContentLoaded", () => {
   const startBtn = document.getElementById("startCapture");
