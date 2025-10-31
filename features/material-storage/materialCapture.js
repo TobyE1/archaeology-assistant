@@ -3,6 +3,7 @@
 console.log("[MSC] script loaded");
 
 window.addEventListener("DOMContentLoaded", () => {
+  console.log("[MSC] DOM loaded");
   const startBtn = document.getElementById("startCapture");
   const capture1Btn = document.getElementById("capture1");
   const capture2Btn = document.getElementById("capture2");
