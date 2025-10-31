@@ -1,7 +1,7 @@
 // =============================================================
 // Material Storage Capture | Debug-enabled version
 // =============================================================
-
+alert("materialCapture.js loaded!");
 console.log("[MSC] script loaded");
 
 // Wait until DOM is ready
